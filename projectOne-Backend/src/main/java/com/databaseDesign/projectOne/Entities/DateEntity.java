@@ -1,47 +1,51 @@
 package com.databaseDesign.projectOne.Entities;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 @Entity
-public class Date {
+@Table(name="Date")
+public class DateEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) 
-    private Integer dataId;
+    private Integer dateId;
 
     private String dateType;
 
     @JsonFormat(pattern="MM/dd/yyyy")
-    private java.util.Date date;
+    private Date date;
 
     @ManyToOne
-    @JsonManagedReference
+    @JsonIgnore
     @JoinColumn(name="contact_id")
     private Contact contact;
 
-    public Date() {
+    public DateEntity() {
 
     }
 
-    public Date(String dateType, java.util.Date date) {
+    public DateEntity(String dateType, java.util.Date date) {
         this.setDateType(dateType);
         this.setDate(date);
     }
 
-    public Integer getDataId() {
-        return dataId;
+    public Integer getDateId() {
+        return dateId;
     }
 
-    public void setDataId(Integer dataId) {
-        this.dataId = dataId;
+    public void setDateId(Integer dateId) {
+        this.dateId = dateId;
     }
 
     public String getDateType() {
@@ -52,11 +56,11 @@ public class Date {
         this.dateType = dateType;
     }
 
-    public java.util.Date getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(java.util.Date date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

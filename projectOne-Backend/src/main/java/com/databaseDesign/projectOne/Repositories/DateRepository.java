@@ -7,13 +7,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.databaseDesign.projectOne.Entities.Date;
+import com.databaseDesign.projectOne.Entities.DateEntity;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called contactRespository
 // CRUD refers Create, Read, Update, Delete
 
 @Repository
-public interface DateRepository extends JpaRepository<Date, Integer> {
+public interface DateRepository extends JpaRepository<DateEntity, Integer> {
     @Query(value = "SELECT * from Date d where d.contact_id =:id ", nativeQuery = true)       // using @query
-    List<Date> findByContactId(@Param("id") Integer id);
+    List<DateEntity> findByContactId(@Param("id") Integer id);
 }

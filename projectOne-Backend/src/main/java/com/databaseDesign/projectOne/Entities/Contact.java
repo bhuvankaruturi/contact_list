@@ -34,7 +34,7 @@ public class Contact {
 
     @OneToMany(orphanRemoval = true, mappedBy="contact", cascade = CascadeType.ALL)
     @JsonBackReference
-    private Set<Date> dates = new HashSet<Date>();
+    private Set<DateEntity> dates = new HashSet<DateEntity>();
 
     public Contact() {
 
@@ -106,15 +106,15 @@ public class Contact {
         phone.setContact(this);
     }
 
-    public Set<Date> getDates() {
+    public Set<DateEntity> getDates() {
         return dates;
     }
 
-    public void setDates(Set<Date> dates) {
+    public void setDates(Set<DateEntity> dates) {
         this.dates = dates;
     }
 
-    public void addDate(Date date) {
+    public void addDate(DateEntity date) {
         this.dates.add(date);
         date.setContact(this);
     }

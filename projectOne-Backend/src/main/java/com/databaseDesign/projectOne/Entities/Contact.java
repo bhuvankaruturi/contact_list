@@ -26,7 +26,7 @@ public class Contact {
 
     @OneToMany(orphanRemoval=true, mappedBy="contact", cascade = CascadeType.ALL)
     @JsonBackReference
-    private Set<Address> addresses = new HashSet<Address>();
+    private Set<AddressEntity> addresses = new HashSet<AddressEntity>();
 
     @OneToMany(orphanRemoval = true, mappedBy="contact", cascade = CascadeType.ALL)
     @JsonBackReference
@@ -80,15 +80,15 @@ public class Contact {
         else this.lName = lName;
     }
 
-    public Set<Address> getAddresses() {
+    public Set<AddressEntity> getAddresses() {
         return addresses;
     }
 
-    public void setAddresses(Set<Address> addresses) {
+    public void setAddresses(Set<AddressEntity> addresses) {
         this.addresses = addresses;
     }
 
-    public void addAddress(Address address) {
+    public void addAddress(AddressEntity address) {
         this.addresses.add(address);
         address.setContact(this);
     }

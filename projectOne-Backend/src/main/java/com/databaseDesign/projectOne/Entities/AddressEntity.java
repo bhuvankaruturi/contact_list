@@ -6,11 +6,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Address {
+@Table(name="Address")
+public class AddressEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer addressId;
@@ -26,15 +28,15 @@ public class Address {
     private String zip;
 
     @ManyToOne
-    @JsonManagedReference
+    @JsonIgnore
     @JoinColumn(name= "contact_id")
     private Contact contact;
 
-    public Address() {
+    public AddressEntity() {
 
     }
 
-    public Address(String addressType, String address, String city, String state, String zip) {
+    public AddressEntity(String addressType, String address, String city, String state, String zip) {
         this.setAddressType(addressType);
         this.setAddress(address);
         this.setCity(city);

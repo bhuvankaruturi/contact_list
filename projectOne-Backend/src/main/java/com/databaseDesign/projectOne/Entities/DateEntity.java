@@ -10,19 +10,24 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.databaseDesign.projectOne.Views.Views;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name="Date")
 public class DateEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    @JsonView(Views.Public.class)
     private Integer dateId;
 
+    @JsonView(Views.Public.class)
     private String dateType;
 
     @JsonFormat(pattern="MM/dd/yyyy")
+    @JsonView(Views.Public.class)
     private Date date;
 
     @ManyToOne

@@ -8,23 +8,31 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.databaseDesign.projectOne.Views.Views;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name="Address")
 public class AddressEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonView(Views.Public.class)
     private Integer addressId;
 
+    @JsonView(Views.Public.class)
     private String addressType;
 
+    @JsonView(Views.Public.class)
     private String address;
 
+    @JsonView(Views.Public.class)
     private String city;
 
+    @JsonView(Views.Public.class)
     private String state;
 
+    @JsonView(Views.Public.class)
     private String zip;
 
     @ManyToOne

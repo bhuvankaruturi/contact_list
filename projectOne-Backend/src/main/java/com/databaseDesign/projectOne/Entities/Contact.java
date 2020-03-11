@@ -10,30 +10,37 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.databaseDesign.projectOne.Views.Views;
+// import com.fasterxml.jackson.annotation.JsonBackReference;
+// import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonView(Views.Public.class)
     private Integer contactId;
 
+    @JsonView(Views.Public.class)
     private String fName;
 
+    @JsonView(Views.Public.class)
     private String mName;
 
+    @JsonView(Views.Public.class)
     private String lName;
 
     @OneToMany(orphanRemoval=true, mappedBy="contact", cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonView(Views.Internal.class)
     private Set<AddressEntity> addresses = new HashSet<AddressEntity>();
 
     @OneToMany(orphanRemoval = true, mappedBy="contact", cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonView(Views.Internal.class)
     private Set<PhoneEntity> phones = new HashSet<PhoneEntity>();
 
     @OneToMany(orphanRemoval = true, mappedBy="contact", cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonView(Views.Internal.class)
     private Set<DateEntity> dates = new HashSet<DateEntity>();
 
     public Contact() {

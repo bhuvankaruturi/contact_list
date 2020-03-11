@@ -3,7 +3,7 @@ package com.databaseDesign.projectOne.Controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+// import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,10 +22,10 @@ public class DateController {
     @Autowired
     private DateService dateService;
 
-    @GetMapping(path = "/contact/{id}/dates")
-    public @ResponseBody Iterable<DateEntity> getAllDates(@PathVariable("id") Integer id) {
-        return dateService.getAllDates(id);
-    }
+    // @GetMapping(path = "/contact/{id}/dates")
+    // public @ResponseBody Iterable<DateEntity> getAllDates(@PathVariable("id") Integer id) {
+    //     return dateService.getAllDates(id);
+    // }
 
     @PostMapping(path = "/contact/{id}/date")
     public @ResponseBody DateEntity addDate(@PathVariable("id") Integer id

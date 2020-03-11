@@ -3,7 +3,7 @@ package com.databaseDesign.projectOne.Controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+// import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,10 +21,10 @@ public class PhoneController {
     @Autowired
     private PhoneService phoneService;
 
-    @GetMapping(path="/contact/{id}/phones")
-    public @ResponseBody Iterable<PhoneEntity> getAllPhones(@PathVariable("id") Integer id) {
-        return phoneService.getAllPhones(id);
-    }
+    // @GetMapping(path="/contact/{id}/phones")
+    // public @ResponseBody Iterable<PhoneEntity> getAllPhones(@PathVariable("id") Integer id) {
+    //     return phoneService.getAllPhones(id);
+    // }
 
     @PostMapping(path="/contact/{id}/phone")
     public @ResponseBody PhoneEntity addPhone(@PathVariable("id") Integer id

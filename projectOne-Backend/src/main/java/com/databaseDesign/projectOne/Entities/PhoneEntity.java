@@ -8,19 +8,25 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.databaseDesign.projectOne.Views.Views;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name="Phone")
 public class PhoneEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonView(Views.Public.class)
     private Integer phoneId;
 
+    @JsonView(Views.Public.class)
     private String phoneType;
 
+    @JsonView(Views.Public.class)
     private String areaCode;
 
+    @JsonView(Views.Public.class)
     private String number;
 
     @ManyToOne

@@ -30,7 +30,7 @@ public class Contact {
 
     @OneToMany(orphanRemoval = true, mappedBy="contact", cascade = CascadeType.ALL)
     @JsonBackReference
-    private Set<Phone> phones = new HashSet<Phone>();
+    private Set<PhoneEntity> phones = new HashSet<PhoneEntity>();
 
     @OneToMany(orphanRemoval = true, mappedBy="contact", cascade = CascadeType.ALL)
     @JsonBackReference
@@ -93,15 +93,15 @@ public class Contact {
         address.setContact(this);
     }
 
-	public Set<Phone> getPhones() {
+	public Set<PhoneEntity> getPhones() {
 		return phones;
 	}
 
-	public void setPhones(Set<Phone> phones) {
+	public void setPhones(Set<PhoneEntity> phones) {
 		this.phones = phones;
     }
     
-    public void addPhone(Phone phone) {
+    public void addPhone(PhoneEntity phone) {
         this.phones.add(phone);
         phone.setContact(this);
     }

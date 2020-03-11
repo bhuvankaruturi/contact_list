@@ -7,13 +7,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.databaseDesign.projectOne.Entities.Phone;
+import com.databaseDesign.projectOne.Entities.PhoneEntity;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called contactRespository
 // CRUD refers Create, Read, Update, Delete
 
 @Repository
-public interface PhoneRepository extends JpaRepository<Phone, Integer> {
+public interface PhoneRepository extends JpaRepository<PhoneEntity, Integer> {
     @Query(value = "SELECT * from Phone p where p.contact_id =:id ", nativeQuery = true)       // using @query
-    List<Phone> findByContactId(@Param("id") Integer id);
+    List<PhoneEntity> findByContactId(@Param("id") Integer id);
 }

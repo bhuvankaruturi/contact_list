@@ -6,11 +6,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Phone {
+@Table(name="Phone")
+public class PhoneEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer phoneId;
@@ -22,15 +24,15 @@ public class Phone {
     private String number;
 
     @ManyToOne
-    @JsonManagedReference
+    @JsonIgnore
     @JoinColumn(name="contact_id")
     private Contact contact;
 
-    public Phone() {
+    public PhoneEntity() {
 
     }
 
-    public Phone(String phoneType, String areaCode, String number) {
+    public PhoneEntity(String phoneType, String areaCode, String number) {
         this.setPhoneType(phoneType);
         this.setAreaCode(areaCode);
         this.setNumber(number);

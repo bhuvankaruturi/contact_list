@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Contact List</title>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">
+              Contact List
+            </a>
+        </nav>
+        <div class="container">
+            <div class="row">
+              <div class="col-sm-4">
+                <ul class="list-group" id="list">
+                </ul>
+              </div>
+              <div class="col-sm-8">
+                  <div id="details">
+                    <h1 id="name"></h1>
+                    <div id="address-section">
+                        <h4>Addresses</h4>
+                        <ul class="list-group" id="address"></ul>
+                        <form id="address-form">
+                            <div class="form-group">
+                                <input type="text" placeholder="Address Type" class="form-control" id="addressType"/>
+                            </div>
+                            <div class="form-group">
+                                <textarea rows="2" placeholder="Address" class="form-control" id="addressVal"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" placeholder="City" class="form-control" id="city"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" placeholder="State" class="form-control" id="state"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" placeholder="Zip code" class="form-control" id="zip"/>
+                            </div>
+                            <button id="address-submit" type="submit" class="btn btn-primary">Submit</button>
+                            <button id="address-cancel" class="btn btn-danger">Cancel</button>
+                        </form>
+                        <button id="address-add" class="btn btn-success">Add address</button>
+                    </div>
+                    <div id="phone-section">
+                        <h4>Phones</h4>
+                        <ul class="list-group" id="phone"></ul>
+                        <form id="phone-form">
+                            <div class="form-group">
+                                <input type="text" placeholder="Phone Type" class="form-control" id="phoneType"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" placeholder="Area code" class="form-control" id="areacode"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" placeholder="Number" class="form-control" id="number"/>
+                            </div>
+                            <button id="phone-submit" type="submit" class="btn btn-primary">Submit</button>
+                            <button id="phone-cancel" class="btn btn-danger">Cancel</button>
+                        </form>
+                        <button id="phone-add" class="btn btn-success">Add phone</button>
+                    </div>
+                    <div id="date-section">
+                        <h4>Dates</h4>
+                        <ul class="list-group" id="date"></ul>
+                        <form id="date-form">
+                            <div class="form-group">
+                                <input type="text" placeholder="Date Type" class="form-control" id="dateType"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="date" value="2000-01-31" class="form-control" id="dateVal"/>
+                            </div>
+                            <button id="date-submit" type="submit" class="btn btn-primary">Submit</button>
+                            <button id="date-cancel" class="btn btn-danger">Cancel</button>
+                        </form>
+                        <button id="date-add" class="btn btn-success">Add date</button>
+                    </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+        <script src="assets/js/index.js"></script>
+    </body>
+</html>

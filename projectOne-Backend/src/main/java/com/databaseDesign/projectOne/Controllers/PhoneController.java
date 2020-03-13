@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.databaseDesign.projectOne.Services.PhoneService;
 import com.databaseDesign.projectOne.Entities.PhoneEntity;
 
 @Controller
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/app")
 public class PhoneController {
     @Autowired

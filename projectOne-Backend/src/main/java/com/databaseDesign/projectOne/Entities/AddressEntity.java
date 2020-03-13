@@ -24,16 +24,16 @@ public class AddressEntity {
     private String addressType;
 
     @JsonView(Views.Public.class)
-    private String address;
+    private String address = "";
 
     @JsonView(Views.Public.class)
-    private String city;
+    private String city = "";
 
     @JsonView(Views.Public.class)
-    private String state;
+    private String state = "";
 
     @JsonView(Views.Public.class)
-    private String zip;
+    private String zip = "";
 
     @ManyToOne
     @JsonIgnore

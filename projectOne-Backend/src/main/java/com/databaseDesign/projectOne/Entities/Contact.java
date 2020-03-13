@@ -23,13 +23,13 @@ public class Contact {
     private Integer contactId;
 
     @JsonView(Views.Public.class)
-    private String fName;
+    private String fName = "";
 
     @JsonView(Views.Public.class)
-    private String mName;
+    private String mName = "";
 
     @JsonView(Views.Public.class)
-    private String lName;
+    private String lName = "";
 
     @OneToMany(orphanRemoval=true, mappedBy="contact", cascade = CascadeType.ALL)
     @JsonView(Views.Internal.class)

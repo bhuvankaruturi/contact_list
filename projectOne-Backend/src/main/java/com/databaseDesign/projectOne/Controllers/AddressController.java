@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.databaseDesign.projectOne.Services.AddressService;
@@ -39,6 +40,12 @@ public class AddressController {
     public @ResponseBody AddressEntity modifyAddress(@PathVariable("id") Integer id
             ,@RequestBody AddressEntity modifiedAddress) {
         return addressService.modifyAddress(id, modifiedAddress);
+    }
+
+    @DeleteMapping(path="/address/{id}")
+    public @ResponseBody String deleteAddress(@PathVariable("id") Integer id) {
+        addressService.deleteAddress(id);
+        return "deleted";
     }
 
 }

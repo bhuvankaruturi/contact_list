@@ -3,6 +3,7 @@ package com.databaseDesign.projectOne.Services;
 import java.util.List;
 import java.util.ArrayList;
 
+import org.hibernate.StaleStateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,5 +50,15 @@ public class PhoneService {
                 .orElseGet(() -> {
                     return null;
                 });
+    }
+
+    public void deletePhone(Integer phoneId) {
+        try {
+            phoneRepository.deleteById(phoneId);
+        }
+        catch(StaleStateException e) {
+            System.out.println(e.toString());
+            return;
+        } 
     }
 }

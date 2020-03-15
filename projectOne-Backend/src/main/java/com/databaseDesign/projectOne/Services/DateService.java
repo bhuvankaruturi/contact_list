@@ -49,4 +49,8 @@ public class DateService {
                     return null;
                 });
     }
+
+    public void deleteDate(Integer dateId) {
+        dateRepository.deleteById(dateId);
+    }
 }

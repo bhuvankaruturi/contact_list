@@ -1,0 +1,30 @@
+.row {
+    margin-top: 1rem;
+}
+
+#contact:hover {
+    cursor: pointer;
+}
+
+
+.btn-success {
+    margin: 0.5rem;
+}
+
+form {
+    margin: 5px 0 5px 0;
+}
+
+form > button, li > button {
+    margin: 0rem;
+}
+
+li > .btn {
+    float: right;
+    border-radius: 40%;
+    margin: 0 2px 0 2px;
+}
+
+.mod {
+    background-color: rgb(181, 241, 241);
+}

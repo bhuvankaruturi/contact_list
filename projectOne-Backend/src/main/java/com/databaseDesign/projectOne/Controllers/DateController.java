@@ -5,6 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 // import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
@@ -14,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.databaseDesign.projectOne.Services.DateService;
 
 import com.databaseDesign.projectOne.Entities.DateEntity;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
@@ -47,6 +48,12 @@ public class DateController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Date " + id + " not found");
         }
         return modifiedDate;
+    }
+
+    @DeleteMapping(path="/date/{id}")
+    public @ResponseBody String deleteDate(@PathVariable("id") Integer id) {
+        dateService.deleteDate(id);
+        return "deleted";
     }
 
 }

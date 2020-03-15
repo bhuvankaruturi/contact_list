@@ -48,4 +48,8 @@ public class AddressService {
                 })
                 .orElseGet(() -> { return null; });
     }
+
+    public void deleteAddress(Integer addressId) {
+        addressRepository.deleteById(addressId);
+    }
 }

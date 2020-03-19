@@ -11,7 +11,8 @@ function template(strings, ...keys) {
     });
 }
 // buttons
-let buttons = '<button class="btn btn-danger btn-sm" type="del">d</button><button class="btn btn-primary btn-sm" type="mod">u</button>';
+let buttons = `<button class="btn btn-sm" type="del"><img src="./assets/icons/bin.svg" alt="del"/></button>
+                <button class="btn btn-sm" type="mod"><img src="./assets/icons/edit.svg" alt="mod"/></button>`;
 // templates for List elements
 let contactLiTemplate = template`<li class="list-group-item" type="contact" id="${0}">
                                                 <span>${1}</span>
@@ -25,7 +26,7 @@ let addressLiTemplate = template`<li class="list-group-item" type="address" id="
                                                 <span>${5}</span> ${'buttons'}</li>`;
 let phoneLiTemplate = template`<li class="list-group-item" type="phone" id="${0}">
                                                 <span>${1}</span>:
-                                                <span>${2}</span> 
+                                                (<span>${2}</span>) 
                                                 <span>${3}</span> ${'buttons'}</li>`;
 let dateLiTemplate = template`<li class="list-group-item" type="date" id="${0}">
                                                 <span>${1}</span>: 

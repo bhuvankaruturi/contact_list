@@ -32,16 +32,16 @@ public class PhoneController {
     @PostMapping(path="/contact/{id}/phone")
     public @ResponseBody PhoneEntity addPhone(@PathVariable("id") Integer id
                     ,@RequestBody PhoneEntity newPhone) {
-        if (newPhone.getNumber().length() != 10) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid phone number");
+        if (newPhone.getNumber().length() < 7) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid phone number");
         newPhone = phoneService.addPhone(id, newPhone);
         if (newPhone == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Contact " + id + " not found");
         return newPhone;
     }
 
-    @PutMapping(path="/phone/(id}")
+    @PutMapping(path="/phone/{id}")
     public @ResponseBody PhoneEntity modifyPhone(@PathVariable("id") Integer id
                     ,@RequestBody PhoneEntity modifiedPhone) {
-        if (modifiedPhone.getNumber().length() != 10) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid phone number");
+        if (modifiedPhone.getNumber().length() < 7) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid phone number");
         modifiedPhone = phoneService.modifyPhone(id, modifiedPhone);
         if (modifiedPhone == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Phone " + id + " not found");

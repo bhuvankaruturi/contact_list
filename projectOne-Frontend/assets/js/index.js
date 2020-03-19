@@ -35,7 +35,7 @@ $(function() {
                 console.log(res);
                 $(this).remove();
             });
-            if (dataType="contact") {
+            if (dataType=="contact") {
                 $("#name").text("Contact deleted");
                 elements.forEach((v, i) => {
                     if (i <= 2) $(`#${v}-section`).hide();
@@ -50,6 +50,45 @@ $(function() {
     var hideForm = function(dataType) {
         $(`#${dataType}-form`).hide(200);
         $(`#${dataType}-add`).show();
+    }
+    // search button click handler
+    var handleSearchBtnClick = function(event) {
+        event.preventDefault();
+        let searchString = $("#search").val();
+        if (searchString.length == 0) return;
+        let params = new URLSearchParams();
+        params.append('search', searchString);
+        $.ajax({
+            type: "get",
+            url: baseUri + "/contacts/search?"+params.toString(),
+            dataType: "json"
+        })
+        .done(function(data) {
+            $('#search-query').empty();
+            $('#search-query').append(`<p>Now showing results for: '${searchString}' <button class="btn btn-light btn-sm">clear</button></p>`)
+            $contact.empty();
+            data.forEach(c => {
+                $contact.append(contactLiTemplate(c.contactId, c.fName, c.mName, c.lName, {buttons}));
+            });
+            if (data.length > 0) {
+                showDetails(data[0].contactId);
+            }
+            else {
+                $("#name").text("No results found");
+                elements.forEach((v, i) => {
+                    if (i <= 2) $(`#${v}-section`).hide();
+                })
+            }
+        })
+        .fail(function() {
+            console.log("Something went wrong when fetching contact list");
+        });
+    }
+    // handle clear button click 
+    var handleClearBtnClick = function(event) {
+        $('#search-query').empty();
+        $('#search').val("");
+        location.reload();
     }
     // submit handler definition for contact
     var handleContactSubmit = function() {
@@ -73,8 +112,11 @@ $(function() {
         .done(function(c) {
             if (currentFormMode["contact"][0] == "mod")
                 currentFormMode["contact"][2].replaceWith(contactLiTemplate(c.contactId, c.fName, c.mName, c.lName, {buttons}));
-            else     
+            else {
                 $("#contact").prepend(contactLiTemplate(c.contactId, c.fName, c.mName, c.lName, {buttons}));
+                currentDetailsId = c.contactId;
+                showDetails(currentDetailsId);
+            }  
             $(`#address-form`).trigger('reset');
             currentFormMode["contact"] = ['add'];
             hideForm("contact");
@@ -93,7 +135,7 @@ $(function() {
         requestBody.city = $("#city").val();
         requestBody.state = $("#state").val();
         requestBody.zip = $("#zip").val();
-        console.log(requestBody);
+        // console.log(requestBody);
         let reqParams = {
             type: currentFormMode["address"][0]=="mod"?"put":"post",
             url: currentFormMode["address"][0]=="mod" 
@@ -122,11 +164,11 @@ $(function() {
     // submit handler definition for phone
     var handlePhoneSubmit = function() {
         let requestBody = {};
-        if ($("#phoneType").val() == "" || $("#number").val().length != 10) return;
+        if ($("#phoneType").val() == "" || $("#number").val().length < 7) return;
         requestBody.phoneType = $("#phoneType").val();
         requestBody.areaCode = $("#areaCode").val();
         requestBody.number = $("#number").val();
-        console.log(requestBody);
+        // console.log(requestBody);
         let reqParams = {
             type: currentFormMode["phone"][0]=="mod"?"put":"post",
             url: currentFormMode["phone"][0]=="mod"
@@ -159,7 +201,7 @@ $(function() {
         requestBody.dateType = $("#dateType").val();
         console.log($("#dateVal").val());
         requestBody.date = formatDate($("#dateVal").val(), 0);
-        console.log(requestBody);
+        // console.log(requestBody);
         let reqParams = {
             type: currentFormMode["date"][0]=="mod"?"put":"post",
             url: currentFormMode["date"][0]=="mod"
@@ -172,8 +214,8 @@ $(function() {
         }
         $.ajax(reqParams)
         .done(function(e) {
-            if (currentFormMode["phone"][0] == "mod")
-                currentFormMode["phone"][2].replaceWith(dateLiTemplate(e.dateId, e.dateType, e.date, {buttons: buttons}));
+            if (currentFormMode["date"][0] == "mod")
+                currentFormMode["date"][2].replaceWith(dateLiTemplate(e.dateId, e.dateType, e.date, {buttons: buttons}));
             else
                 $("#date").append(dateLiTemplate(e.dateId, e.dateType, e.date, {buttons: buttons}));
             $(`#date-form`).trigger('reset');
@@ -195,7 +237,6 @@ $(function() {
         if (actionType == "mod") {
             if (currentFormMode[dataType][0] == "mod") currentFormMode[dataType][2].removeClass("mod");
             $li.addClass("mod");
-            console.log(dataType + ' ' + actionType);
             $(`#${dataType}-add`).hide();
             $(`#${dataType}-form`).show(300);
             populateForm(dataType, $li);
@@ -245,6 +286,7 @@ $(function() {
         });
         $(`#${element}`).on('click', 'li button', handleLiButtonClick);
     });
+
     // fetch all the contacts from the database
     $.ajax({
         type: "get",
@@ -256,19 +298,25 @@ $(function() {
         data.forEach(c => {
             $contact.append(contactLiTemplate(c.contactId, c.fName, c.mName, c.lName, {buttons}));
         });
-        if (data.length > 0) showDetails(data[0].contactId);
+        if (data.length > 0) {
+            $("#details").show();
+            currentDetailsId = data[0].contactId;
+            showDetails(data[0].contactId);
+        } else $("#details").hide();
     })
     .fail(function() {
         console.log("Something went wrong when fetching contact list");
-    })
+    });
     
     var contactClickHandler = function() {
         let contactId = $(this).attr("id");
+        currentDetailsId = contactId;
         showDetails(contactId);
     }
 
     $("#contact").on('click', 'li', contactClickHandler);
-
+    $("#search-btn").on('click', handleSearchBtnClick);
+    $("#search-query").on('click', 'p button', handleClearBtnClick);
     var showDetails = function(contactId) {
         $.ajax({
             type: "get",
@@ -278,7 +326,10 @@ $(function() {
             crossDomain: true
         })
         .done(function(data) {
-            $('#name').text(data.fName + " " + data.mName + "," + data.lName);
+            let name = data.fName;
+            name += data.mName==""?"":" " + data.mName;
+            name += data.lName==""?"":"," + data.lName;
+            $('#name').text(name);
             currentDetailsId = data.contactId;
             setSection(data.addresses, "address", "Address");
             setSection(data.phones, "phone", "Phone Numbers");

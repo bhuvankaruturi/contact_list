@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 @Entity
 public class Contact {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonView(Views.Public.class)
     private Integer contactId;
 

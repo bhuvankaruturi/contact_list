@@ -4,11 +4,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 import com.databaseDesign.projectOne.Views.Views;
 // import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -22,12 +24,16 @@ public class Contact {
     @JsonView(Views.Public.class)
     private Integer contactId;
 
+    @NotNull
+    @Column(name = "fname")
     @JsonView(Views.Public.class)
     private String fName = "";
 
+    @Column(name = "mname")
     @JsonView(Views.Public.class)
     private String mName = "";
 
+    @Column(name = "lname")
     @JsonView(Views.Public.class)
     private String lName = "";
 

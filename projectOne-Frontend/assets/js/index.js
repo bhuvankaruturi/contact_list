@@ -51,6 +51,33 @@ $(function() {
         $(`#${dataType}-form`).hide(200);
         $(`#${dataType}-add`).show();
     }
+    // upload button clikc handler
+    var handleUploadBtnClick = function(event) {
+        event.preventDefault();
+        let formData = new FormData();
+        let fileInput = $('#file').get(0);
+        if (fileInput.files && fileInput.files.length == 1) {
+            let file = fileInput.files[0];
+            formData.append("file", file);
+        }
+        else return;
+        $.ajax({
+            type: "POST",
+            url: baseUri + "/contact/add/file",
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData: false,
+            enctype: 'multipart/form-data'
+        })
+        .done(function(data) {
+            console.log(data);
+            location.reload();
+        })
+        .fail(function() {
+            console.log("Something went wrong while processing the file");
+        });
+    }
     // search button click handler
     var handleSearchBtnClick = function(event) {
         event.preventDefault();
@@ -317,6 +344,7 @@ $(function() {
     $("#contact").on('click', 'li', contactClickHandler);
     $("#search-btn").on('click', handleSearchBtnClick);
     $("#search-query").on('click', 'p button', handleClearBtnClick);
+    $("#upload-btn").on('click', handleUploadBtnClick);
     var showDetails = function(contactId) {
         $.ajax({
             type: "get",

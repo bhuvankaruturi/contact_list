@@ -62,7 +62,7 @@ public class FileService {
                     if (values.length >= 16) {
                         String[] dateComps = values[15].split("-");
                         if (dateComps.length > 2) {
-                            String date = dateComps[0] + "/" + dateComps[2] + "/" + dateComps[1];
+                            String date = dateComps[1] + "/" + dateComps[2] + "/" + dateComps[0];
                             DateEntity d = new DateEntity("Birthdate", new SimpleDateFormat("MM/dd/yyyy").parse(date));
                             dateService.addDate(c.getContactId(), d);
                         }

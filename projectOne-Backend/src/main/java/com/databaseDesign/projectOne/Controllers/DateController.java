@@ -25,11 +25,6 @@ public class DateController {
     @Autowired
     private DateService dateService;
 
-    // @GetMapping(path = "/contact/{id}/dates")
-    // public @ResponseBody Iterable<DateEntity> getAllDates(@PathVariable("id") Integer id) {
-    //     return dateService.getAllDates(id);
-    // }
-
     @PostMapping(path = "/contact/{id}/date")
     public @ResponseBody DateEntity addDate(@PathVariable("id") Integer id
             ,@RequestBody DateEntity newDate) {

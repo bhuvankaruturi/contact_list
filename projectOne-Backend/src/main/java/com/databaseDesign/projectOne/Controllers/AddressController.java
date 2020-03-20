@@ -24,11 +24,6 @@ public class AddressController {
     @Autowired
     private AddressService addressService;
 
-    // @GetMapping(path="/contact/{id}/addresses")
-    // public @ResponseBody Iterable<AddressEntity> getAllAddresses(@PathVariable("id") Integer id) {
-    //     return addressService.getAllAddresses(id);
-    // }
-
     @PostMapping(path="/contact/{id}/address")
     public @ResponseBody AddressEntity addAddress(@PathVariable("id") Integer id
             ,@RequestBody AddressEntity newAddress) {

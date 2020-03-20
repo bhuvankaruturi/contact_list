@@ -24,11 +24,6 @@ public class PhoneController {
     @Autowired
     private PhoneService phoneService;
 
-    // @GetMapping(path="/contact/{id}/phones")
-    // public @ResponseBody Iterable<PhoneEntity> getAllPhones(@PathVariable("id") Integer id) {
-    //     return phoneService.getAllPhones(id);
-    // }
-
     @PostMapping(path="/contact/{id}/phone")
     public @ResponseBody PhoneEntity addPhone(@PathVariable("id") Integer id
                     ,@RequestBody PhoneEntity newPhone) {
